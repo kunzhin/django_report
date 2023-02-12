@@ -1,0 +1,79 @@
+{% load static %}
+
+{% if dsm %}
+    <h3 id="{{ dsm }}" class="text-center city_header">{{ dsm }}</h3>
+{% endif %}
+
+{% if tsm %}
+    <h3 id="{{ tsm }}" class="text-center city_header">{{ tsm }}</h3>
+{% endif %}
+
+{% if esr %}
+    <h3 id="{{ esr }}" class="text-center city_header">{{ esr }}</h3>
+{% endif %}
+
+<div class="table-responsive">
+    {{ TOTAL|safe}}
+</div>
+<div class="table-responsive">
+    {{ Tier3|safe}}
+</div>
+<div class="table-responsive">
+    {{ TierTT|safe}}
+</div>
+<div class="table-responsive">
+    {{ TierWHS|safe}}
+</div>
+<div class="table-responsive">
+    {{ KeyWHS|safe}}
+</div>
+
+
+<script>
+    function numberWithSpaces(x) {
+        var parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        return parts.join(".");
+      }
+
+    $(function (){
+        const category = ['COFFEE', 'Food&amp;Diary', 'CPW', 'CONFECTIONERY', 'PURINA']
+        $('tbody>tr>td:nth-child(2)').each(function (){
+
+            if (($.inArray(this.innerHTML, category) === -1) && (this.innerHTML !== '')){
+                $(this).parent().addClass('prerevgr d-none')
+            }
+
+            if ($.inArray(this.innerHTML, category) >= 0){
+                $(this).parent().addClass('table-success revgr')
+            }
+
+            if (this.innerHTML === ''){
+                $(this).text('TOTAL')
+                $(this).parent().addClass('table-dark revgr')
+            }
+        })
+
+        $('tbody>tr.revgr').click(function (){
+            $(this).nextUntil('tr.revgr').each(function () {
+                if ($(this).attr('class') === 'prerevgr d-none') {
+                    $(this).removeClass('d-none')
+                } else {
+                    $(this).addClass('d-none')
+                }
+            })
+        })
+        $('thead>tr').click(function (){
+            let prerevgr = $(this).parent().next().children('tr.prerevgr')
+            if (prerevgr.attr('class') === 'prerevgr d-none'){
+                prerevgr.removeClass('d-none')
+            } else {
+                prerevgr.addClass('d-none')
+            }
+        })
+        $('td').each(function(){
+            $(this).html(numberWithSpaces($(this).text()))
+        })
+    })
+</script>
+<script src="{% static 'colorTimeDynamics.js' %}"></script>

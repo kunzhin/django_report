@@ -1,0 +1,53 @@
+{% load i18n %}
+{% load static %}
+<div class="actions">
+  {% block actions %}
+    {% block actions-form %}
+    {% for field in action_form %}{% if field.label %}<label>{{ field.label }} {% endif %}{{ field }}{% if field.label %}</label>{% endif %}{% endfor %}
+    {% endblock %}
+    {% block actions-submit %}
+        <button type="submit" class="button" title="{% translate "Run the selected action" %}" name="index" value="{{ action_index|default:0 }}">{% translate "Go" %}</button>
+
+    {% if title == 'Выберите Загрузка остатков для изменения' %}
+        <button id="btn_remains" type="button" class="button">Обновить остатки</button>
+
+        <input type="checkbox" id="message" name="message">
+        <label for="message">Telegram</label>
+
+        <div id="animation" class="spinner-border d-none" role="status"></div>
+    {% endif %}
+
+    {% endblock %}
+    {% block actions-counter %}
+    {% if actions_selection_counter %}
+        <span class="action-counter" data-actions-icnt="{{ cl.result_list|length }}">{{ selection_note }}</span>
+        {% if cl.result_count != cl.result_list|length %}
+        <span class="all hidden">{{ selection_note_all }}</span>
+        <span class="question hidden">
+            <a href="#" title="{% translate "Click here to select the objects across all pages" %}">{% blocktranslate with cl.result_count as total_count %}Select all {{ total_count }} {{ module_name }}{% endblocktranslate %}</a>
+        </span>
+        <span class="clear hidden"><a href="#">{% translate "Clear selection" %}</a></span>
+        {% endif %}
+    {% endif %}
+    {% endblock %}
+  {% endblock %}
+</div>
+
+<script>
+    $(document).ready(function (){
+        $('#btn_remains').click(function (event){
+            event.preventDefault();
+            $("#animation").removeClass('d-none');
+            let message = $('input[type=checkbox][name="message"]:checked').val();
+            $.ajax({
+                type: 'GET',
+                url: '/remains/update/',
+                data: {'message': message},
+                success: function (answer){
+                   $("#animation").addClass('d-none');
+                   alert(answer);
+               }
+           })
+        })
+    })
+</script>

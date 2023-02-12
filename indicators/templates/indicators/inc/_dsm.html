@@ -1,0 +1,24 @@
+{% load static %}
+
+{% block dsm %}
+<button class="btn btn-outline-success btn-sm mt-1" type="button" name="btn_dsm" id="total" value="КОНТИНЕНТ" autocomplete="off">
+    КОНТИНЕНТ
+</button>
+<button class="btn btn-outline-success btn-sm mt-1" type="button" name="btn_dsm" id="total" value="Кузбасс - Алтай" autocomplete="off">
+    Кузбасс - Алтай
+</button>
+    {% for terr in dsm %}
+        {% csrf_token %}
+        <div class="btn-group mt-1">
+            <button class="btn btn-outline-success btn-sm" type="button" name="btn_dsm" id="{{ terr.dsm }}" value="{{ terr.dsm }}" autocomplete="off">
+                {{ terr.dsm }}
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-success dropdown-toggle dropdown-toggle-split" name="btn_dsm_filter" id="{{ terr.dsm }}" value="{{ terr.dsm }}" aria-expanded="false">
+              
+            </button>
+        </div>
+    {% endfor %}
+
+    <script src="{% static 'dsm_filter.js' %}"></script>
+{% endblock dsm %}
+

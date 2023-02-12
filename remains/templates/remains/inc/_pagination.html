@@ -1,0 +1,39 @@
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+                <a class="page-link" href="?page=1"><<</a>
+        </li>
+        {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#">Предыдущая</a>
+            </li>
+        {% endif %}
+
+        {% for page in page_obj.paginator.page_range %}
+
+            {% if page_obj.number == page %}
+                <li class="page-item active"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+            {% elif page > page_obj.number|add:'-3' and page < page_obj.number|add:'3'%}
+                <li class="page-item btn-outline-info"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+            {% endif %}
+
+        {% endfor %}
+        
+        {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#">Следующая</a>
+            </li>
+        {% endif %}
+        <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">>></a>
+        </li>     
+    </ul>
+</nav>

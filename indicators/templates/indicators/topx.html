@@ -1,0 +1,58 @@
+{% load static %}
+
+{% if dsm %}
+    <h3 id="{{ dsm }}" class="text-center city_header">{{ dsm }}</h3>
+{% endif %}
+
+{% if tsm %}
+<h3 id="{{ tsm }}" class="text-center city_header">{{ tsm }}</h3>
+{% endif %}
+
+{% if esr %}
+<h3 id="{{ esr }}" class="text-center city_header">{{ esr }}</h3>
+{% endif %}
+
+<div class="table-responsive">
+    {{ df_topx|safe}}
+</div>
+
+
+<script>
+$(function (){
+        const category = ['COFFEE', 'CONFECTIONERY', 'CPW', 'CULINARY', 'Nesquik', 'PURINA']
+        $('tbody>tr>td:nth-child(1)').each(function (){
+
+            if (($.inArray(this.innerHTML, category) === -1) && (this.innerHTML !== '')){
+                $(this).parent().addClass('prerevgr d-none')
+            }
+
+            if ($.inArray(this.innerHTML, category) >= 0){
+                $(this).parent().addClass('table-success revgr')
+            }
+
+            if (this.innerHTML === ''){
+                $(this).text('TOTAL')
+                $(this).parent().addClass('table-dark revgr')
+            }
+        })
+
+        $('tbody>tr.revgr').click(function (){
+            $(this).nextUntil('tr.revgr').each(function () {
+                if ($(this).attr('class') === 'prerevgr d-none') {
+                    $(this).removeClass('d-none')
+                } else {
+                    $(this).addClass('d-none')
+                }
+            })
+        })
+        $('thead>tr').click(function (){
+            let prerevgr = $(this).parent().next().children('tr.prerevgr')
+            if (prerevgr.attr('class') === 'prerevgr d-none'){
+                prerevgr.removeClass('d-none')
+            } else {
+                prerevgr.addClass('d-none')
+            }
+        })
+    })
+</script>
+<script src="{% static 'colorTimeDynamics.js' %}"></script>

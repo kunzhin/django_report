@@ -1,0 +1,67 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/style-remains-table.css' %}">
+
+<div class="head-title-remains sticky">
+    <div class="rem-cont-child"></div>
+    <div class="rem-cont-child"> <img class="rem-icon" src="{% static 'icons/BinaryFile.png' %}"> Код </div>
+    <div class="rem-cont-child"> <img class="rem-icon" src="{% static 'icons/SAP.png' %}"> SAP </div>
+    <div class="rem-cont-child"> <img class="rem-icon" src="{% static 'icons/GroceryShelf.png' %}"> Номенклатура </div>
+    <div class="rem-cont-child"> <img class="rem-icon" src="{% static 'icons/Stacking.png' %}"> Склад </div>
+    <div class="rem-cont-child"> <img class="rem-icon" src="{% static 'icons/TruckBan.png' %}"> Резерв </div>
+    <div class="rem-cont-child"> <img class="rem-icon" src="{% static 'icons/FreeShipping.png' %}"> Остаток </div>
+    <div class="rem-cont-child"> <img class="rem-icon" src="{% static 'icons/DayOff.png' %}"> Срок </div>
+    <div class="rem-cont-child"> <img class="rem-icon" src="{% static 'icons/Delivery.png' %}"> Приход </div>
+    <div class="rem-cont-child"> <img class="rem-icon" src="{% static 'icons/Product.png' %}"> Транзит </div>
+</div>
+
+{% for item in remains %}
+    <div class="remains-container {{ item.topx }}">
+        <div class="rem-cont-child move-place g-row"> <img class="rem-icon" src="{% static 'icons/Shipped.png' %}"> </div>
+        <div class="rem-cont-child code g-row"> <img class="rem-icon-media" src="{% static 'icons/BinaryFile.png' %}"> {{ item.code_continent }} </div>
+        <div class="rem-cont-child sap g-row"> <img class="rem-icon-media" src="{% static 'icons/SAP.png' %}"> {{ item.code_nestle }} </div>
+        <div class="rem-cont-nomenclature pd-name g-row"> {{ item.nomenclature}}</div>
+        <div class="rem-cont-child rem g-row"> <img class="rem-icon-media" src="{% static 'icons/Stacking.png' %}"> {{ item.remaining }} </div>
+        <div class="rem-cont-child res g-row"> <img class="rem-icon-media" src="{% static 'icons/TruckBan.png' %}"> {{ item.reserve }} </div>
+        <div class="rem-cont-child free-rem g-row"> <img class="rem-icon-media" src="{% static 'icons/FreeShipping.png' %}"> {{ item.free_remain }} </div>
+        <div class="rem-cont-child shelf-live g-row"> <img class="rem-icon-media" src="{% static 'icons/DayOff.png' %}"> {{ item.expiration_date }} </div>
+        <div class="rem-cont-child date-transit g-row"> <img class="rem-icon-media" src="{% static 'icons/Delivery.png' %}"> {{ item.date_arrival }} </div>
+        <div class="rem-cont-child transit g-row"> <img class="rem-icon-media" src="{% static 'icons/Product.png' %}"> {{ item.transit_box }} </div>
+    </div>
+{% endfor %}
+
+<!-- Modal -->
+<div class="modal fade" id="skuMoveModal" tabindex="-1" aria-labelledby="skuMoveModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg modal-fullscreen-md-down">
+    <div class="modal-content">
+
+    </div>
+  </div>
+</div>
+
+
+<script>
+    $(function (){
+
+        $("#search").focus();
+
+        $("#search").keyup(function(){
+            _this = this;
+            $.each($("div.remains-container"), function() {
+                if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1) {
+                    $(this).hide();
+                    } else {
+                    $(this).show();
+                    }
+            });
+        });
+
+        $('#cancel').on('click', function(){
+            $("#search").val('');
+            $.each($("div.remains-container"), function() {
+                    $(this).show();
+            });
+        });
+    })
+</script>
+<script src="{% static 'skuMove.js' %}"></script>

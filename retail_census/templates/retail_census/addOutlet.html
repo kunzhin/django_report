@@ -1,0 +1,125 @@
+{% extends 'retail_census/index.html' %}
+
+{% load static %}
+
+{% block content %}
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+      <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+    </symbol>
+</svg>
+  
+<div class="alert alert-primary d-flex align-items-center" role="alert">
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+    <div>
+        <p><b>*</b> - обязательные поля<br>
+    </div>
+</div>
+
+    <form class='row g-3 align-items-center' action='{% url "add_outlet_record" %}' method='post' enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.non_field.errors }}
+
+        <div class="col-sm-12">
+            <label for="id_esr" class="form-label">*Территория ESR:</label>
+            <select name="esr" class="form-control form-control-sm" id="id_esr">
+            </select>
+        </div>
+
+        <div class="col-sm-12">
+            <label for="{{ form.photo.id_for_label }}" class="form-label">*Фото вывески</label>
+            {{ form.photo }}
+        </div>
+
+        <div class="col-sm-3">
+            <label for="id_corporateBodyName" class="form-label">*Юр.лицо</label>
+            <input name="corporateBodyName" type="text" class="form-control form-control-sm" id="id_corporateBodyName" placeholder="ООО/ИП">
+        </div>
+
+        <div class="col-sm-2">
+            <label for="id_taxIdentificationNumber" class="form-label">ИНН</label>
+            <input name="taxIdentificationNumber" type="number" class="form-control form-control-sm" id="id_taxIdentificationNumber" placeholder="1234567890">
+        </div>
+
+        <div class="col-sm-3">
+            <label for="id_contactName" class="form-label">ФИО Представителя ТТ</label>
+            <input name="contactName" type="text" class="form-control form-control-sm" id="id_contactName" placeholder="ФИО">
+        </div>
+
+        <div class="col-sm-2">
+            <label for="id_count_tt" class="form-label">Кол-во ТТ</label>
+            <input name="count_tt" type="number" class="form-control form-control-sm" id="id_count_tt">
+        </div>
+
+        <div class="col-sm-2">
+            <label for="id_phoneNumber" class="form-label">Телефон</label>
+            <input name="phoneNumber" type="text" class="form-control form-control-sm" id="id_phoneNumber" placeholder="+7 900 900 9999">
+        </div>
+
+        <div class="col-sm-3">
+            <label for="id_name_tt" class="form-label">*Название ТТ</label>
+            <input name="name_tt" type="text" class="form-control form-control-sm" id="id_name_tt" placeholder="Продукты">
+        </div>
+
+        <div class="col-sm-2">
+            <label for="id_city" class="form-label">*Город</label>
+            <input name="city" type="text" class="form-control form-control-sm" id="id_city" placeholder="">
+        </div>
+
+        <div class="col-sm-3">
+            <label for="id_street" class="form-label">*Улица</label>
+            <input name="street" type="text" class="form-control form-control-sm" id="id_street" placeholder="">
+        </div>
+
+        <div class="col-sm-1">
+            <label for="houseNumber" class="form-label">*Дом</label>
+            <input name="houseNumber" type="text" class="form-control form-control-sm" id="id_houseNumber" placeholder="">
+        </div>
+
+        <div class="col-sm-3">
+            <label for="{{ form.channel_tt.id_for_label }}" class="form-label">*Канал ТТ</label>
+            {{ form.channel_tt }}
+        </div>
+
+        <div class="col-sm-3">
+            <label for="{{ form.presenceNestle.id_for_label }}" class="form-label">*Ассортимент Нестле</label>
+            {{ form.presenceNestle }}
+        </div>
+
+        <div class="col-sm-3">
+            <label for="{{ form.competitors.id_for_label }}" class="form-label">*Конкуренты</label>
+            {{ form.competitors }}
+        </div>
+
+        <div class="col-sm-3">
+            <div class="form-check form-switch">
+                <label class="form-check-label" for="id_deliveryContract">Договор поставки ООО "КОНТИНЕНТ"</label>
+                <input name="deliveryContract" class="form-check-input" type="checkbox" role="switch" id="id_deliveryContract">
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <label for="id_dateConversation" class="form-label">*Дата переговоров</label>
+            <input type="datetime-local" name="dateConversation" id="id_dateConversation">
+        </div>
+
+        <div class="col-sm-12">
+            <label for="id_comment" class="form-label">Доп.информация</label>
+            <textarea name="comment" cols="40" rows="5" class="form-control form-control-sm" id="id_comment"></textarea>
+        </div>
+
+        <div class="col-sm-12 mb-1">
+            <div class="col-sm-3">
+                <label for="{{ form.statusWorkedOut.id_for_label }}" class="form-label">*Статус</label>
+                {{ form.statusWorkedOut }}
+            </div>
+        </div>
+
+        <div class="col-sm-3 mb-5">
+            <button type='submit' class='btn btn-secondary btn-sm m-1'>Добавить запись</button>
+        </div>
+    </form>
+
+    <script src="{% static 'outletFormControl.js' %}"></script>
+
+{% endblock content %}

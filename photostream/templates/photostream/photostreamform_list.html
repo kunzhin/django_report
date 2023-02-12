@@ -1,0 +1,39 @@
+{% extends 'photostream/index.html' %}
+{% load static %}
+
+{% block content %}
+
+        {% for item in audit_item_list %}
+            <div class="card mb-3">
+                <div class="row align-items-center gx-3">
+                    <div class="col-md-4 p-3 ">
+                    {% if item.photo %}
+                        <a href="{{ item.get_absolute_url }}"><img src="{{ item.photo.url }}" class="img-fluid img-thumbnail mx-auto d-block" style="img-fluidmax-width: 100%; height: auto;" alt="{{ item.tt }}"></a>
+                    {% else %}
+                        <a href="{{ item.get_absolute_url }}"><img src="{{ item.url_photo }}" class="img-fluid img-thumbnail mx-auto d-block" style="img-fluidmax-width: 100%; height: auto;" alt="{{ item.tt }}"></a>
+                    {% endif %}
+                    </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+
+                        <p class="card-text"><b>Наименование ТТ:</b> {{ item.tt }}</p>
+                        <p class="card-text"><b>Адрес:</b> {{ item.address }}</p>
+                        <p class="card-text"><b>ESR:</b> {{ item.esr }}</p>
+                        <p class="card-text"><b>Категория:</b> {{ item.category }}</p>
+                        <p class="card-text"><b>Дата создания:</b> {{ item.created_at|date:'d-m-Y' }}</p>
+                        <p class="card-text"><b>Срок исправления:</b> {{ item.date_correction|date:'d-m-Y' }}</p>
+                        <p class="card-text"><b>Дата исправления:</b> {{ item.updated_at|date:'d-m-Y' }}</p>
+                        {% if item.status_worked_out == True %}
+                            <p class="card-text"><b>Статус:</b> Зачёт <img src="{% static 'ico/ok_32.png' %}" alt=""></p>
+                        {% else %}
+                            <p class="card-text"><b>Статус:</b> На испралении <img src="{% static 'ico/cancel_32.png' %}" alt=""></p>
+                        {% endif %}
+
+                    </div>
+                </div>
+                </div>
+            </div>           
+        {% endfor %}
+{% include 'photostream/inc/_pagination.html' %}
+    <br>
+{% endblock content %}

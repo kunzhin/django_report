@@ -1,0 +1,20 @@
+
+{% csrf_token %}
+
+<input type="radio" class="btn-check" name="ind_sidebar" id="volume" value="volume" autocomplete="on">
+<label class="btn btn-outline-success btn-sm mt-1" for="volume">Объем</label>
+
+<input type="radio" class="btn-check" name="ind_sidebar" id="topx" value="topx" autocomplete="on">
+<label class="btn btn-outline-success btn-sm mt-1" for="topx">ТОП Х</label>
+
+<input type="radio" class="btn-check" name="ind_sidebar" id="strength" value="strength" autocomplete="on">
+<label class="btn btn-outline-success btn-sm mt-1" for="strength">Запуски</label>
+
+<input type="radio" class="btn-check" name="ind_sidebar" id="coverage" value="coverage" autocomplete="on">
+<label class="btn btn-outline-success btn-sm mt-1" for="coverage">Покрытие</label>
+{% comment %}
+<input type="radio" class="btn-check" name="ind_sidebar" id="launches" value="launches" autocomplete="on">
+<label class="btn btn-outline-success btn-sm mt-1" for="launches">Запуски</label>
+{% endcomment %}
+<input type="radio" class="btn-check" name="ind_sidebar" id="info_tt" value="info_tt" autocomplete="on">
+<label class="btn btn-outline-success btn-sm mt-1" for="info_tt">Продажи по точкам</label>

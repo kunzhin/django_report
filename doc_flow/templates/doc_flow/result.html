@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block sidebar %}
+
+{% endblock sidebar %}
+
+{% block content %}
+    <div class="accordion mb-3" id="accordionFlush1">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-heading1">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse1" aria-expanded="false" aria-controls="flush-collapse1">
+                    <b>Снято фактур: </b> {{ rem_invoice_count }}
+                </button>
+            </h2>
+            <div id="flush-collapse1" class="accordion-collapse collapse" aria-labelledby="flush-heading1" data-bs-parent="#accordionFlush1">
+                <div class="accordion-body">
+                    {{ rem_invoice|safe }}
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-heading1">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse2" aria-expanded="false" aria-controls="flush-collapse2">
+                    <b>Снято возвратов: </b> {{ rem_withdrawn_count }}
+                </button>
+            </h2>
+            <div id="flush-collapse2" class="accordion-collapse collapse" aria-labelledby="flush-heading1" data-bs-parent="#accordionFlush1">
+                <div class="accordion-body">
+                    {{ rem_withdrawn|safe }}
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-heading1">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse3" aria-expanded="false" aria-controls="flush-collapse3">
+                    <b>Снято актов: </b> {{ rem_as_count }}
+                </button>
+            </h2>
+            <div id="flush-collapse3" class="accordion-collapse collapse" aria-labelledby="flush-heading1" data-bs-parent="#accordionFlush1">
+                <div class="accordion-body">
+                    {{ rem_as|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion mb-3" id="accordionFlush2">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-heading2">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse4" aria-expanded="false" aria-controls="flush-collapse4">
+                    <b>Выдано фактур: </b> {{ is_invoice_count }}
+                </button>
+            </h2>
+            <div id="flush-collapse4" class="accordion-collapse collapse" aria-labelledby="flush-heading2" data-bs-parent="#accordionFlush2">
+                <div class="accordion-body">
+                    {{ is_invoice|safe }}
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-heading2">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse5" aria-expanded="false" aria-controls="flush-collapse5">
+                    <b>Выдано возвратов: </b> {{ is_withdrawn_count }}
+                </button>
+            </h2>
+            <div id="flush-collapse5" class="accordion-collapse collapse" aria-labelledby="flush-heading2" data-bs-parent="#accordionFlush2">
+                <div class="accordion-body">
+                    {{ is_withdrawn|safe }}
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-heading2">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse6" aria-expanded="false" aria-controls="flush-collapse6">
+                    <b>Выдано актов: </b> {{ is_as_count }}
+                </button>
+            </h2>
+            <div id="flush-collapse6" class="accordion-collapse collapse" aria-labelledby="flush-heading2" data-bs-parent="#accordionFlush2">
+                <div class="accordion-body">
+                    {{ is_as|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion mb-3" id="accordionFlush3">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-heading3">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse7" aria-expanded="false" aria-controls="flush-collapse7">
+                    <b>Фактуры в долгах: </b> {{ debt_invoice_count }}
+                </button>
+            </h2>
+            <div id="flush-collapse7" class="accordion-collapse collapse" aria-labelledby="flush-heading3" data-bs-parent="#accordionFlush3">
+                <div class="accordion-body">
+                    {{ debt_invoice|safe }}
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-heading3">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse8" aria-expanded="false" aria-controls="flush-collapse8">
+                    <b>Возвраты в долгах: </b> {{ debt_withdrawn_count }}
+                </button>
+            </h2>
+            <div id="flush-collapse8" class="accordion-collapse collapse" aria-labelledby="flush-heading3" data-bs-parent="#accordionFlush3">
+                <div class="accordion-body">
+                    {{ debt_withdrawn|safe }}
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-heading3">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse9" aria-expanded="false" aria-controls="flush-collapse9">
+                    <b>Акты в долгах: </b> {{ debt_as_count }}
+                </button>
+            </h2>
+            <div id="flush-collapse9" class="accordion-collapse collapse" aria-labelledby="flush-heading3" data-bs-parent="#accordionFlush3">
+                <div class="accordion-body">
+                    {{ debt_as|safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row text-center">
+        <div class="col-12">
+            <input type="button" class='btn btn-secondary btn-sm m-1' onclick="history.back();" value="Назад"/>
+        </div>
+     </div>
+{% endblock content %}

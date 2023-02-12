@@ -1,0 +1,46 @@
+{% load static %}
+
+
+{% block sidebar_filter %}
+
+<div class='container-fluid mt-3 text-center' id="dsm_block">
+    {% block dsm %}
+        {% include 'indicators/inc/_dsm.html' %}
+    {% endblock dsm %}
+</div>
+
+<div class='container-fluid mt-3 text-center' id="tsm_block">
+    {% block tsm %}
+        {% include 'indicators/inc/_tsm.html' %}
+    {% endblock tsm %}
+</div>
+
+<div class='container-fluid mt-3 text-center' id="esr_block">
+    {% block esr %}
+        {% include 'indicators/inc/_esr.html' %}
+    {% endblock esr %}
+</div>
+{% block filter %}
+    {% if kpi != 'info_tt' %}
+        <div class='container-fluid mt-3 text-center' id="filter_block">
+                {% include 'indicators/inc/_filter.html' %}
+        </div>
+    {% else %}
+        {% comment %}
+        <div class="form-check form-switch">
+            <label class="form-check-label" for="downloadXlsx">Выгрузить данные в Excel</label>
+            <input name="downloadXlsx" class="form-check-input" type="checkbox" role="switch" id="downloadXlsx">
+        </div>
+        {% endcomment %}
+    {% endif %}
+{% endblock filter %}
+
+{% endblock sidebar_filter %}
+
+{% comment %}
+{% endcomment %}
+
+{% block script %}
+
+{% endblock script %}
+

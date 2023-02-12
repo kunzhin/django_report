@@ -1,0 +1,97 @@
+.sticky {
+    position: sticky;
+    top: 1px;
+}
+
+.information {
+    display: grid;
+    grid-template-rows: repeat(auto-fit, minmax(50px, 1fr));
+}
+
+.sort-menu {
+    display: grid;
+    background-color: lightblue;
+    margin-bottom: 1px;
+    grid-template-columns: 100px repeat(8, 1fr);
+    border-radius: 3px;
+}
+
+.title-sort-menu {
+    justify-self: center;
+    align-self: center;
+    margin: 0.5em;
+}
+
+@media screen and (max-width: 500px) {
+    .sort-menu {
+        display: grid;
+        position: sticky;
+        background-color: lightblue;
+        margin-bottom: 1px;
+        border-radius: 3px;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+    }
+
+    .title-sort-menu {
+        justify-self: center;
+        align-self: center;
+        margin: 0.5em;
+        grid-row-start: 1;
+        grid-column-start: 1;
+        grid-column-end: 5;
+    }
+}
+
+div[class^="box-sort-menu-"] {
+    justify-self: center;
+    align-self: center;
+    margin: 0.5em;
+}
+
+div[class^="box-sort-menu-"]:hover {
+    cursor: pointer;
+}
+
+.info-tt {
+    display: grid;
+    background-color: white;
+    margin-bottom: 5px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(auto-fit, 1fr);
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.info-tt-child {
+    justify-self: start;
+    align-self: start;
+    padding: 0.5em;
+}
+
+.rem-icon {
+ margin-right: 0.5em;
+}
+
+.box-1:hover {
+    cursor: pointer;
+}
+
+.box-3 {
+    grid-row-start: 2;
+    grid-column-start: 2;
+}
+.box-4 {
+    grid-row-start: 3;
+    grid-column-start: 2;
+}
+.box-5 {
+    grid-row-start: 2;
+    grid-column-start: 1;
+}
+.box-6 {
+    grid-row-start: 3;
+    grid-column-start: 1;
+}

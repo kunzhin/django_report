@@ -1,0 +1,8 @@
+<div class="btn-group mb-3" role="group" aria-label="Basic checkbox toggle button group">
+    {% for item in audit_item_list %}
+        <input type="checkbox" class="btn-check" id="btncheck{{ item.esr.pk }}" autocomplete="off">
+        <label class="btn btn-outline-primary" for="btncheck{{ item.esr.pk }}">{{ item.esr }}</label>
+
+    {% endfor %}
+
+</div>

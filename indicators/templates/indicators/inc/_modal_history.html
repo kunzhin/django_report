@@ -1,0 +1,147 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="historyModalLabel">{{ name_tt }} {{ no_data }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+    <p><b>Канал ТТ:</b> {{ channel }}</p>
+    <p><b>Последняя дата доставки:</b> {{ last_date_shipment }}</p>
+    <p><b>Сеть:</b> {{ chain }}</p>
+    <p><b>Среднее кол-во заказов:</b> {{ avg_num_orders }}</p>
+
+    {% if coffee_strength != 'Зачёт' %}
+        <p>
+            <b>Усиление Кофе:</b> продать на <b>{{ coffee_strength }} р.</b> |
+            <b>Фото: </b><span>{{ foto.0 }}</span>
+        </p>
+    {% else %}
+        <p>
+            <b>Усиление Кофе:</b> <span style="color: green">{{ coffee_strength }}</span> |
+            {% if foto.0 == 'Нет фото' %}
+                <b>Фото: </b><span style="color: red">{{ foto.0 }}</span></p>
+            {% else %}
+                <b>Фото: </b><span style="color: green">{{ foto.0 }}</span>
+            {% endif %}
+        </p>
+    {% endif %}
+
+    {% if maggi_strenght != 'Зачёт' %}
+        <p>
+            <b>Усиление Магги:</b> продать на <b>{{ maggi_strenght }} р.</b> |
+            <b>Фото: </b><span>{{ foto.1 }}</span>
+        </p>
+    {% else %}
+        <p>
+            <b>Усиление Магги:</b> <span style="color: green">{{ maggi_strenght }}</span> |
+            {% if foto.1 == 'Нет фото' %}
+                <b>Фото: </b><span style="color: red">{{ foto.1 }}</span></p>
+            {% else %}
+                <b>Фото: </b><span style="color: green">{{ foto.1 }}</span>
+            {% endif %}
+        </p>
+    {% endif %}
+
+    {% if purina_strenght != 'Зачёт' %}
+        <p>
+        {% if purina_strenght == 'Исключение' %}
+            <b>Усиление Пурина:</b> <b style="color: red">{{ purina_strenght }}</b> |
+            <b>Фото: </b><span>{{ foto.2 }}</span>
+        {% else %}
+            <b>Усиление Пурина:</b> продать на <b>{{ purina_strenght }} р.</b> |
+            <b>Фото: </b><span>{{ foto.2 }}</span>
+        {% endif %}
+        </p>
+    {% else %}
+        <p>
+            <b>Усиление Пурина:</b> <span style="color: green">{{ purina_strenght }}</span> |
+            {% if foto.2 == 'Нет фото' %}
+                <b>Фото: </b><span style="color: red">{{ foto.2 }}</span></p>
+            {% else %}
+                <b>Фото: </b><span style="color: green">{{ foto.2 }}</span>
+            {% endif %}
+        </p>
+    {% endif %}
+
+    <div class="table-responsive">
+        {{ topx|safe}}
+    </div>
+
+    <div class="table-responsive">
+        {{ volume|safe}}
+    </div>
+
+    <p> {{ error }}</p>
+</div>
+
+<script>
+$(function (){
+    const category_top = ['COFFEE', 'CONFECTIONERY', 'CPW', 'CULINARY', 'Nesquik', 'PURINA']
+        $('table#topx_table>tbody>tr>td:nth-child(1)').each(function (){
+
+            if (($.inArray(this.innerHTML, category_top) === -1) && (this.innerHTML !== '')){
+                $(this).parent().addClass('prerevgr d-none')
+            }
+
+            if ($.inArray(this.innerHTML, category_top) >= 0){
+                $(this).parent().addClass('table-success revgr')
+            }
+
+            if (this.innerHTML === ''){
+                $(this).text('TOTAL')
+                $(this).parent().addClass('table-dark revgr')
+            }
+        })
+
+        $('table#topx_table>tbody>tr.revgr').click(function (){
+            $(this).nextUntil('tr.revgr').each(function () {
+                if ($(this).attr('class') === 'prerevgr d-none') {
+                    $(this).removeClass('d-none')
+                } else {
+                    $(this).addClass('d-none')
+                }
+            })
+        })
+        $('table#topx_table>thead>tr').click(function (){
+            let prerevgr = $(this).parent().next().children('tr.prerevgr')
+            if (prerevgr.attr('class') === 'prerevgr d-none'){
+                prerevgr.removeClass('d-none')
+            } else {
+                prerevgr.addClass('d-none')
+            }
+        })
+
+    const category_vol = ['COFFEE', 'Food&amp;Diary', 'CPW', 'CONFECTIONERY', 'PURINA']
+        $('table#volume_table>tbody>tr>td:nth-child(1)').each(function (){
+
+            if (($.inArray(this.innerHTML, category_vol) === -1) && (this.innerHTML !== '')){
+                $(this).parent().addClass('prerevgr d-none')
+            }
+
+            if ($.inArray(this.innerHTML, category_vol) >= 0){
+                $(this).parent().addClass('table-success revgr')
+            }
+
+            if (this.innerHTML === ''){
+                $(this).text('TOTAL')
+                $(this).parent().addClass('table-dark revgr')
+            }
+        })
+
+        $('table#volume_table>tbody>tr.revgr').click(function (){
+            $(this).nextUntil('tr.revgr').each(function () {
+                if ($(this).attr('class') === 'prerevgr d-none') {
+                    $(this).removeClass('d-none')
+                } else {
+                    $(this).addClass('d-none')
+                }
+            })
+        })
+        $('table#volume_table>thead>tr').click(function (){
+            let prerevgr = $(this).parent().next().children('tr.prerevgr')
+            if (prerevgr.attr('class') === 'prerevgr d-none'){
+                prerevgr.removeClass('d-none')
+            } else {
+                prerevgr.addClass('d-none')
+            }
+        })
+    })
+</script>

@@ -1,0 +1,59 @@
+{% extends 'photostream/index.html' %}
+{% load static %}
+
+{% block content %}
+
+  <form action='{% url "add_photo_field_comment" %}' method='POST'>
+    {% csrf_token %}
+      {{ form.non_field.errors }}
+{% comment "" %}      {{ form.as_p }} {% endcomment %}
+        <p class="mb-3">
+            <label for="id_esr" class="form-label">Территория ESR:</label>
+            <select name="esr" class="form-control" required="" id="id_esr">
+            </select>
+        </p>
+        <p class="mb-3">
+            <label for="id_tt" class="form-label">Наименование ТТ:</label>
+            <select name="tt" class="form-control" required="" id="id_tt">
+            </select>
+        </p>
+        <p class="mb-3">
+            <label for="id_address" class="form-label">Адрес ТТ:</label>
+            <select name="address" class="form-control" required="" id="id_address">
+            </select>
+        </p>
+        <p class="mb-3">
+            <label for="{{ form.category.id_for_label }}" class="form-label">Категория фото: </label>
+            {{ form.category }}
+            <p class='invalid-feedback'>
+                {{ form.category.errors }}
+            </p>
+        </p>
+        <p class="mb-3">
+            <label for="{{ form.photo.id_for_label }}" class="form-label">Фотография: </label>
+            {{ form.photo }}
+            <p class='invalid-feedback'>
+                {{ form.photo.errors }}
+            </p>
+        </p>
+        <p class="mb-3">
+            <label for="id_comment" class="form-label">Комментарий:</label>
+            <textarea name="comment" cols="40" rows="5" class="form-control" id="id_comment"></textarea>
+        </p>
+        <p class="mb-3">
+            <label for="id_status_worked_out" class="form-label">Зачёт (Да/Нет):</label>
+            <input type="checkbox" name="status_worked_out" class="form-check-label" id="id_status_worked_out">
+        </p>
+        <p class="mb-3">
+            <label for="id_date_correction" class="form-label">Дата исправления:</label>
+            <input type="date" name="date_correction" id="id_date_correction">
+        </p>
+    <br>
+    <button type='submit' class='btn btn-secondary btn-sm m-1'>Добавить аудит</button>
+  </form>
+<script src="{% static 'form_control.js' %}"></script>
+<br>
+
+{% endblock content %}
+
+

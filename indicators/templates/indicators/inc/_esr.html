@@ -1,0 +1,12 @@
+{% load static %}
+
+{% block esr %}
+    {% for terr in esr %}
+        {% csrf_token %}
+        <input type="radio" class="btn-check esr_filter" name="btnradio_esr" id="{{ terr.esr }}" value="{{ terr.esr }}" autocomplete="off">
+        <label class="btn btn-outline-success btn-sm mt-1" for="{{ terr.esr }}">{{ terr.esr }}</label>
+    {% endfor %}
+
+    <script src="{% static 'esr_filter.js' %}"></script>
+
+{% endblock esr%}

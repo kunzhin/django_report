@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block sidebar %}
+
+{% endblock sidebar %}
+
+{% block content %}
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    <form class='row align-items-center' action="{% url 'doc_flow' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>{{ form.non_field_errors }}</p>
+        <div class="col-sm-12 mb-3">
+            <label for="{{ form.xlsxfile_1.id_for_label }}" class="form-label"><b>{{ form.xlsxfile_1.label_tag }}</b></label>
+            {{ form.xlsxfile_1.errors }}
+            <input id="xlsxfile_1" class="form-control form-control-sm" type="file" name="xlsxfile_1" required>
+        </div>
+        <div class="col-sm-12 mb-3">
+            <label for="{{ form.xlsxfile_2.id_for_label }}" class="form-label"><b>{{ form.xlsxfile_2.label_tag }}</b></label>
+            {{ form.xlsxfile_2.errors }}
+            <input id="xlsxfile_2" class="form-control form-control-sm" type="file" name="xlsxfile_2" required>
+        </div>
+        <div class="col-sm-3 mb-3">
+            <button type='submit' class='btn btn-secondary btn-sm m-1'>Обработать</button>
+        </div>
+    </form>
+{% endblock content %}

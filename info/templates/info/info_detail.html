@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} {{ info_detail.title }} {% endblock title %}
+
+{% block content %}
+            <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ info_detail.title }}</h5>
+            </div>
+            <div class="row mt-1 mb-3">
+              {% if info_detail.photo %}
+                  <img src="{{ info_detail.photo.url }}" class="img-fluid img-thumbnail mx-auto d-block" style="width: 75%; height: auto"  alt="{{ item.title }}"></a>
+              {% else %}
+                  <img src="{% static 'placeholder.png' %}" class="img-fluid img-thumbnail" style="width: 400px; height: 225px" alt="{{ item.title }}"></a>
+              {% endif %}
+            </div>
+                <div class="card-body">
+                    <p class="card-text">{{ info_detail.content }}</p>
+                    <input type="button" onclick="history.back();" value="Назад"/>
+                    <br>
+                    <br>
+                    <p class="card-text"><small class="text-muted">{{ info_detail.created_at }}</small></p>
+                </div>
+            </div>
+
+{% endblock content %}

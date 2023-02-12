@@ -1,0 +1,37 @@
+{% load static %}
+
+{% block content %}
+    <h3 id="{{ city_id }}" class="text-center city_header">{{ city }}</h3>
+    <p id="{{ date_update.date|date:'d-m-Y' }}" class="text-center city_header">Дата последнего обновления: <b>{{ date_update.date|date:'d-m-Y' }}</b></p>
+    <div class='container-fluid mt-3 text-left'>
+    <button type="button" class="btn btn-success btn-sm mt-1 remains_filter" id="topx">TOP X</button>
+    <button type="button" class="btn btn-success btn-sm mt-1 remains_filter" id="suspended">Вывод</button>
+    <button type="button" class="btn btn-warning btn-sm mt-1 remains_filter" id="i2l">Запуски</button>
+    {% for item in category %}
+        {% csrf_token %}
+        <button type="button" class="btn btn-secondary btn-sm mt-1 remains_filter" id="{{ item.code_category }}">{{ item.category }}</button>
+    {% endfor %}
+    </div>
+    <br>
+    <br>
+    <div id="animation_table" class="d-flex justify-content-center d-none">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Загрузка...</span>
+        </div>
+    </div>
+    
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="search" id="search" placeholder="Поиск" aria-label="Поиск" aria-describedby="button-addon2">
+        <button class="btn btn-outline-secondary" type="button" id="cancel" id="button-addon2">Очистить</button>
+    </div>
+
+    <div class="remains-data mb-5" id="div_table">
+    {% if city_id == 'kontinent'%}
+        {% include 'remains/remains_contlog.html' %}
+    {% else %}
+        {% include 'remains/remains_table.html' %}
+    {% endif %}
+    </div>
+
+<script src="{% static 'remains_filter.js' %}"></script>
+{% endblock content %}

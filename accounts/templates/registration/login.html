@@ -1,0 +1,46 @@
+{% extends  'base_login.html' %}
+
+{% block main %}
+    {% if form.errors %}
+        <p>Не верные имя пользователя или пароль</p>
+    {% endif %}
+
+    {% if next %}
+          {% if user.is_authenticated %}
+                <p>У вашей учетной записи нет доступа к этой странице. Чтобы продолжить,
+пожалуйста, войдите в систему с учетной записью, у которой есть доступ.</p>
+          {% else %}
+                <p>Пожалуйста, войдите, чтобы увидеть эту страницу.</p>
+          {% endif %}
+    {% endif %}
+
+<form method="post">
+{% csrf_token %}
+    <table class="table table-bordered">
+      <thead class="table-dark">
+        <tr>
+            <th scope="col">Авторизация</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td>
+                {{ form.username }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                {{ form.password }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" class="btn btn-secondary" value="login">Войти</button>
+                <input type="hidden" name="next" value="{{ next }}" />
+            </td>
+        </tr>
+      </tbody>
+    </table>
+</form>
+
+{% endblock %}

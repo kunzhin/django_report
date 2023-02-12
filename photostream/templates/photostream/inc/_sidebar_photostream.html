@@ -1,0 +1,12 @@
+{% csrf_token %}
+
+<button type="button" class="btn btn-outline-success btn-sm mt-1"
+        onclick="document.location='{% url 'statistics' %}'">Статистика</button>
+        
+<button type="button" class="btn btn-outline-success btn-sm mt-1"
+        onclick="document.location='{% url 'photostream_audit_list' %}'">Список Аудитов</button>
+
+{% if request.user.groups.all.0.name == 'TSM' %}
+    <button type="button" class="btn btn-outline-success btn-sm mt-1"
+            onclick="document.location='{% url 'add_photo_comment' %}'">Добавить Аудит</button>
+{% endif %}

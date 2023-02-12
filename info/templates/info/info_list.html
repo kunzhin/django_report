@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+        {% for item in info_list %}
+            <div class="card mb-3">
+            <div class="row mt-3">
+              {% if item.photo %}
+                  <a href="{{ item.get_absolute_url }}"><img src="{{ item.photo.url }}" class="rounded mx-auto d-block" style="width: 400px; height: 225px" alt="{{ item.title }}"></a>
+              {% else %}
+                  <a href="{{ item.get_absolute_url }}"><img src="{% static 'placeholder.png' %}" class="rounded mx-auto d-block" style="width: 400px; height: 225px" alt="{{ item.title }}"></a>
+              {% endif %}
+            </div>
+                <div class="card-body">
+                    <a href="{{ item.get_absolute_url }}"><h5 class="card-title">{{ item.title }}</h5></a>
+                    <p class="card-text">{{ item.content }}</p>
+                    <p class="card-text"><small class="text-muted">{{ item.created_at }}</small></p>
+                </div>
+            </div>
+        {% endfor %}
+
+
+    {% include 'info/inc/_pagination.html' %}
+{% endblock content %}

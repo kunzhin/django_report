@@ -1,0 +1,149 @@
+{% load static %}
+{% load index %}
+
+{% get_static_prefix as STATIC_URL %}
+
+<link href="{% static 'css/info_tt.css' %}" rel="stylesheet">
+
+{% if dsm %}
+    <h3 id="dsm" class="text-center city_header">{{ dsm }}</h3>
+{% endif %}
+
+{% if tsm %}
+<h3 id="tsm" class="text-center city_header">{{ tsm }}</h3>
+{% endif %}
+
+{% if esr %}
+<h3 id="esr" class="text-center city_header">{{ esr }}</h3>
+{% endif %}
+
+  
+<div class="alert alert-primary d-flex align-items-center" role="alert">
+    <div class="information">
+        <div>
+            <h4 class="alert-heading">Принятые обозначения:</h4>
+        </div>
+        <div class="info-tt-child">
+            <img class="rem-icon" src="{% static 'icons_info_tt/CalendarPlus.png' %}">
+            <span class="font-bold"> - День посещения</span>
+        </div>
+        <div class="info-tt-child">
+            <img class="rem-icon" src="{% static 'icons_info_tt/Sigma.png' %}">
+            <span class="font-bold"> - Продажи текущего месяца</span>
+        </div>
+        <div class="info-tt-child">
+            <img class="rem-icon" src="{% static 'icons_info_tt/Camera.png' %}">
+            <span class="font-bold"> - Зачтенные фотографии</span>
+        </div>
+        <div class="info-tt-child">
+            <img class="rem-icon" src="{% static 'icons_info_tt/coffee_beans_24px.png' %}">
+            <span class="font-bold"> - Усиление Coffee</span>
+        </div>
+        <div class="info-tt-child">
+            <img class="rem-icon" src="{% static 'icons_info_tt/pepper_grinder_24px.png' %}">
+            <span class="font-bold"> - Усиление Maggi</span>
+        </div>
+        <div class="info-tt-child">
+            <img class="rem-icon" src="{% static 'icons_info_tt/pets_24px.png' %}">
+            <span class="font-bold"> - Усиление Purina</span>
+        </div>
+    </div>
+</div>
+<div class="sticky">
+    <div class="sort-menu">
+        <div class="title-sort-menu"><span class="font-bold">Сортировка</span></div>
+        {% for col in df_info.columns %}
+            {% if forloop.counter0 <= 7 %}
+                <div class="box-sort-menu-{{ forloop.counter }}" id="box-{{ forloop.counter }}">
+                    <img class="rem-icon" src="{{ STATIC_URL }}icons_info_tt/{{ img|index:forloop.counter0 }}">
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="search" id="search" placeholder="Поиск" aria-label="Поиск" aria-describedby="button-addon2">
+        <button class="btn btn-light" type="button" id="cancel" id="button-addon2">Очистить</button>
+    </div>
+</div>
+
+<div class="info-tt-container">
+    {% for index, row in df_info.iterrows %}
+        <div class="info-tt">
+            {% for cel in row %}
+                {% if forloop.counter0 <= 7 %}
+                    <div class="info-tt-child box-{{ forloop.counter }}">
+                        <img class="rem-icon" src="{{ STATIC_URL }}icons_info_tt/{{ img|index:forloop.counter0 }}">
+                        <span class="font-bold">{{ cel|safe }}</span>
+                    </div>
+                {% else %}
+                    <div class="info-tt-child box-{{ forloop.counter }}">
+                        <span class="font-bold">{{ df_info.columns|index:forloop.counter0 }}</span>: {{ cel }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="historyModal" tabindex="-1" aria-labelledby="historyModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+
+    </div>
+  </div>
+</div>
+
+<script>
+    $(function (){
+
+        $("#search").focus();
+
+        $("#search").keyup(function(){
+            _this = this;
+            $.each($("div.info-tt"), function() {
+                if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1) {
+                    $(this).hide();
+                    } else {
+                    $(this).show();
+                    }
+            });
+        });
+
+        $('#cancel').on('click', function(){
+            $("#search").val('');
+            $.each($("div.info-tt"), function() {
+                    $(this).show();
+            });
+        });
+
+        $("div.box-1").click(function (){
+            let user = $("h3.city_header").attr('id')
+            let territory = $("h3.city_header").text()
+            let name_tt = $(this).children(2).text()
+            let address = $(this).next().children(2).text()
+
+            $("#loading").removeClass('d-none');
+
+            $.ajax({
+                type: 'GET',
+                url: 'history_tt/',
+                data: {'user': user, 'territory': territory, 'name_tt': name_tt, 'address': address},
+                success: function (answer){
+
+                    $('.modal-content').html(answer);
+
+                    $("#loading").addClass('d-none');
+
+                    $('#historyModal').modal('show')
+                },
+                //error: function (error){
+                //    $("#animation_table").addClass('d-none');
+                //    alert('error; ' + eval(error));
+                //    }
+            })
+        })
+    })
+</script>
+<script src="{% static 'info-tt-sort.js' %}"></script>
+

@@ -1,0 +1,19 @@
+{% load static %}
+
+{% block tsm %}
+    {% for terr in tsm %}
+        {% csrf_token %}
+        <div class="btn-group mt-1">
+            <button class="btn btn-outline-success btn-sm" type="button" name="btn_tsm" id="{{ terr.tsm }}" value="{{ terr.tsm }}" autocomplete="off">
+                {{ terr.tsm }}
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-success dropdown-toggle dropdown-toggle-split" name="btn_tsm_filter" id="{{ terr.tsm }}" value="{{ terr.tsm }}" aria-expanded="false">
+            </button>
+        </div>
+    {% endfor %}
+
+    <script src="{% static 'tsm_filter.js' %}"></script>
+{% endblock tsm %}
+
+
+

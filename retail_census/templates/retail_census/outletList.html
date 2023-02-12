@@ -1,0 +1,74 @@
+{% extends 'retail_census/index.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    {% for item in outlet_list %}
+        <div class="card mb-3">
+            <div class="row align-items-center gx-3">
+                <div class="col-md-4 p-3 ">
+                    <a href="{{ item.get_absolute_url }}"><img src="{{ item.photo.url }}"
+                                                               class="img-fluid img-thumbnail mx-auto d-block"
+                                                               style="img-fluidmax-width: 100%; height: auto;"
+                                                               alt="{{ item.name_tt }}"
+                                                               id="outlet_detail"></a>
+                </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <p class="card-text"><b>ESR:</b> {{ item.esr }}</p>
+                    <p class="card-text"><b>Юр.лицо:</b> {{ item.corporateBodyName }}</p>
+                    <p class="card-text"><b>ИНН:</b> {{ item.taxIdentificationNumber }}</p>
+                    <p class="card-text"><b>Кол-во ТТ:</b> {{ item.count_tt }}</p>
+                    <p class="card-text"><b>Наименование ТТ:</b> {{ item.name_tt }}</p>
+                    <p class="card-text"><b>Адрес:</b> {{ item.city }}, {{ item.street }}, {{ item.houseNumber }}</p>
+                    <p class="card-text"><b>Дата переговоров:</b> {{ item.dateConversation|date:'d-m-Y H:i' }}</p>
+                    <p class="card-text"><b>Текущий статус:</b> {{ item.statusWorkedOut}}</p>
+                    {% if item.deliveryContract == True %}
+                        <p class="card-text"><b>Договор поставки:</b> Есть <img src="{% static 'ico/ok_32.png' %}" alt=""></p>
+                    {% else %}
+                        <p class="card-text"><b>Договор поставки:</b> Нет <img src="{% static 'ico/cancel_32.png' %}" alt=""></p>
+                    {% endif %}
+
+                </div>
+                
+            </div>
+            </div>
+            <div class="card-footer text-muted">
+                <p class="card-text"><b>Дата записи:</b> {{ item.created_at|date:'d-m-Y' }}</p>
+            </div>
+        </div>           
+    {% endfor %}
+
+    <!-- Modal -->
+    <div class="modal fade" id="outletDetail" tabindex="-1" aria-labelledby="historyModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+
+        </div>
+      </div>
+    </div>
+
+    {% include 'photostream/inc/_pagination.html' %}
+    <br>
+
+    <script>
+        $(function (){
+            $("img#outlet_detail").click(function (event){
+                event.preventDefault()
+                console.log($(this).parent().attr('href'))
+                let outletUrl = $(this).parent().attr('href')
+
+                $.ajax({
+                    type: 'GET',
+                    url: outletUrl,
+                    success: function (answer){
+                        $('.modal-content').html(answer);
+                        $('#outletDetail').modal('show')
+                    }
+                })
+            })
+        })
+    </script>
+
+{% endblock content %}

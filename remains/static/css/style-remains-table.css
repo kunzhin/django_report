@@ -1,0 +1,130 @@
+.remains-container {
+    display: grid;
+    background-color: white;
+    margin-bottom: 5px;
+    grid-template-columns: 3em 6em 8em 1fr 8em 8em 8em 8em 8em 8em;
+}
+
+.rem-cont-child {
+    justify-self: center;
+    align-self: center;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+}
+
+.rem-cont-nomenclature {
+    justify-self: start;
+    align-self: center;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+}
+
+.rem-icon {
+ margin-right: 0.2em;
+}
+
+.rem-icon-media {
+    display: none;
+}
+
+.topx {
+    background-color: #d6ffdd;
+}
+
+.move-place:hover {
+    cursor: pointer;
+}
+
+.head-title-remains {
+    display: grid;
+    background-color: lightblue;
+    margin-bottom: 5px;
+    grid-template-columns: 3em 6em 8em 1fr 8em 8em 8em 8em 8em 8em;
+}
+
+.sticky {
+    position: sticky;
+    top: 0px;
+}
+
+@media screen and (max-width: 1000px){
+    .head-title-remains {
+        display: none;
+    }
+
+    .rem-icon-media {
+        display: flex;
+        margin-right: 0.5em;
+        align-self: center;
+    }
+
+    .remains-container {
+    display: grid;
+    background-color: white;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 1em;
+    }
+
+    .g-row {
+        display: flex;
+        padding-left: 0.5em;
+        justify-self: start;
+        align-self: center;
+    }
+
+    .topx {
+    background-color: #d6ffdd;
+    }
+
+    .pd-name {
+        grid-row-start: 1;
+        grid-row-end: 2;
+        grid-column-start: 1;
+        font-weight: bold;
+    }
+
+    .code {
+        grid-row-start: 2;
+        grid-column-start: 1;
+    }
+
+    .sap {
+        grid-column-start: 1;
+        grid-row-start: 3;
+    }
+
+    .shelf-live {
+        grid-row-start: 4;
+        grid-column-start: 1;
+    }
+
+    .move-place {
+        grid-row-start: 5;
+        grid-column-start: 1;
+    }
+
+    .rem {
+        grid-row-start: 1;
+        grid-column-start: 2;
+    }
+
+    .res {
+        grid-row-start: 2;
+        grid-column-start: 2;
+    }
+
+    .free-rem {
+        grid-row-start: 3;
+        grid-column-start: 2;
+    }
+
+    .date-transit {
+        grid-row-start: 4;
+        grid-column-start: 2;
+    }
+
+    .transit {
+        grid-row-start: 5;
+        grid-column-start: 2;
+    }
+}

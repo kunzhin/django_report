@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+{% block sidebar %}
+    {% include 'indicators/inc/_sidebar_indicators.html' %}
+    <p id="{{ date_update.date|date:'d-m-Y' }}" class="text-center city_header mt-3">Дата последнего обновления: <b>{{ date_update.date|date:'d-m-Y' }}</b></p>
+{% endblock sidebar %}
+
+
+
+{% block content %}
+
+{% endblock content %}
+
+

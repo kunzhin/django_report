@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ audit_item.tt }} {% endblock title %}
+
+{% block sidebar %}
+    {% include 'photostream/inc/_sidebar_photostream.html' %}
+{% endblock sidebar %}
+
+{% block content %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            {% if audit_item.status_worked_out == True %}
+                <p class="card-text"><b>Статус:</b> Зачёт <img src="{% static 'ico/ok_32.png' %}" alt=""></p>
+            {% else %}
+                <form action='' method='POST'>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type='submit' class='btn btn-secondary btn-sm m-1'>Акцептовать</button>
+                <input type="button" class='btn btn-secondary btn-sm m-1' onclick="history.back();" value="Назад"/>
+                </form>
+
+            {% endif %}
+        </div>
+
+        <div class="card-body">
+            {% if audit_item.photo %}
+                <img src="{{ audit_item.photo.url }}" alt='{{ audit_item.tt }}' class="img-fluid img-thumbnail mx-auto d-block" style="img-fluidmax-width: 100%; height: auto;">
+            {% else %}
+                <img src="{{ audit_item.url_photo }}" alt='{{ audit_item.tt }}' class="img-fluid img-thumbnail mx-auto d-block" style="img-fluidmax-width: 100%; height: auto;">
+            {% endif %}
+            <br>
+            <ul class="list-group list-group-flush" style="background-color: #d3d3d3">
+                <li class="list-group-item"><b>DSM:</b> {{ audit_item.dsm}}</li>
+                <li class="list-group-item"><b>TSM:</b> {{ audit_item.tsm}}</li>
+                <li class="list-group-item"><b>ESR:</b> {{ audit_item.esr}}</li>
+                <li class="list-group-item"><b>Наименование ТТ:</b> {{ audit_item.tt}}</li>
+                <li class="list-group-item"><b>Адрес:</b> {{ audit_item.address}}</li>
+                <li class="list-group-item"><b>Категория:</b> {{ audit_item.category}}</li>
+                <li class="list-group-item"><b>Комментарий:</b> {{ audit_item.comment|safe|linebreaksbr}}</li>
+                <li class="list-group-item"><b>Дата исполнения:</b>{{ audit_item.date_correction|date:'d-m-Y'}}</li>
+            </ul>
+        </div>
+
+        <div class="card-footer text-muted">
+            <b>Дата создания:</b> {{audit_item.created_at|date:'d-m-Y'}}
+        </div>
+    </div>
+{% endblock content %}

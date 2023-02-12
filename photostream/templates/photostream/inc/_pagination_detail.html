@@ -1,0 +1,13 @@
+<div class="d-flex bd-highlight mb-3">
+    {% if audit_item.get_previous_by_created_at %}
+            <div class="p-2 bd-highlight"><a class="page-link" href="{{ audit_item.get_previous_by_created_at.get_absolute_url }}"><<<</a></div>
+    {% else %}
+            <div class="p-2 bd-highlight"><a class="page-link" href="#"><<<</a></div>
+    {% endif %}
+
+    {% if audit_item.get_next_by_created_at %}
+        <div class="ms-auto p-2 bd-highlight"><a class="page-link" href="{{ audit_item.get_next_by_created_at.get_absolute_url }}">>>></a></div>
+    {% else %}
+        <div class="ms-auto p-2 bd-highlight"><a class="page-link" href="#">>>></a></div>
+    {% endif %} 
+</div>

@@ -1,0 +1,76 @@
+{% load static %}
+
+{% if dsm %}
+    <h3 id="{{ dsm }}" class="text-center city_header">{{ dsm }}</h3>
+{% endif %}
+
+{% if tsm %}
+<h3 id="{{ tsm }}" class="text-center city_header">{{ tsm }}</h3>
+{% endif %}
+
+{% if esr %}
+<h3 id="{{ esr }}" class="text-center city_header">{{ esr }}</h3>
+{% endif %}
+
+<div class="table-responsive mb-3">
+    {{ launches|safe}}
+</div>
+
+<div class="table-responsive mb-3">
+    {{ df_task|safe}}
+</div>
+
+<div class="accordion mb-3" id="accordionFlush3">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-heading3">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse7" aria-expanded="false" aria-controls="flush-collapse7">
+                <b>Усиление кофе без фото: </b> {{ coffee_nan_count }}
+            </button>
+        </h2>
+        <div id="flush-collapse7" class="accordion-collapse collapse" aria-labelledby="flush-heading3" data-bs-parent="#accordionFlush3">
+            <div class="accordion-body">
+                {{ coffee_nan|safe}}
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-heading3">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse8" aria-expanded="false" aria-controls="flush-collapse8">
+                <b>Усиление магги без фото: </b> {{ maggi_nan_count }}
+            </button>
+        </h2>
+        <div id="flush-collapse8" class="accordion-collapse collapse" aria-labelledby="flush-heading3" data-bs-parent="#accordionFlush3">
+            <div class="accordion-body">
+                {{ maggi_nan|safe }}
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-heading3">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse9" aria-expanded="false" aria-controls="flush-collapse9">
+                <b>Усиление пурина без фото: </b> {{ purina_nan_count }}
+            </button>
+        </h2>
+        <div id="flush-collapse9" class="accordion-collapse collapse" aria-labelledby="flush-heading3" data-bs-parent="#accordionFlush3">
+            <div class="accordion-body">
+                {{ purina_nan|safe }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function numberWithSpaces(x) {
+        let parts = x.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+        return parts.join(".");
+      }
+    $(function (){
+        $('td').each(function(){
+            $(this).html(numberWithSpaces($(this).text()))
+        })
+    })
+</script>
+
+<script src="{% static 'colorTimeDynamics.js' %}"></script>
+

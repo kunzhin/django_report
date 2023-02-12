@@ -1,0 +1,30 @@
+{% csrf_token %}
+
+<button type="button" class="btn btn-outline-success btn-sm mt-1"
+    id="statistic">Статистика</button>
+        
+<button type="button" class="btn btn-outline-success btn-sm mt-1"
+    id="outletList" onclick="document.location='{% url 'outlet_list' %}'">Список точек</button>
+
+<button type="button" class="btn btn-outline-success btn-sm mt-1"
+    id="addOutlet" onclick="document.location='{% url 'add_outlet_record' %}'">Добавить точку</button>
+
+{% comment %}
+<script>
+    $(function (){
+        $('#addOutlet').click(function (event){
+            event.preventDefault();
+            $.ajax({
+                type: 'GET',
+                url: 'add_outlet_record/',
+                success: function (answer){
+                    $('#block_content').html(answer).fadeIn(500)
+                },
+                error: function (error){
+                    alert('error: ' + eval(error))
+                }
+            })
+        })
+    })
+</script>
+{% endcomment %}

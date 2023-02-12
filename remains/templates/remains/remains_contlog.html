@@ -1,0 +1,144 @@
+{% load static %}
+{% load index %}
+
+<link rel="stylesheet" href="{% static 'css/style-remains-contlog.css' %}">
+
+<div class="head-title-remains sticky-title">
+    <div class="remains-title-child">
+        <div class="title-child">
+            <img class="rem-icon" src="{% static 'icons/Address.png' %}">
+        </div>
+        <div class="title-text-child">
+            <span>Площадка</span>
+        </div>
+    </div>
+    <div class="remains-title-child">
+        <div class="title-child">
+            <img class="rem-icon" src="{% static 'icons/Product.png' %}">
+        </div>
+        <div class="title-text-child">
+            <span>Транзит(кор.)</span>
+        </div>
+    </div>
+    <div class="remains-title-child">
+        <div class="title-child">
+            <img class="rem-icon" src="{% static 'icons/TruckBan.png' %}">
+        </div>
+        <div class="title-text-child">
+            <span>Резерв</span>
+        </div>
+    </div>
+    <div class="remains-title-child">
+        <div class="title-child">
+            <img class="rem-icon" src="{% static 'icons/FreeShipping.png' %}">
+        </div>
+        <div class="title-text-child">
+            <span>Остаток</span>
+        </div>
+    </div>
+    <div class="remains-title-child">
+        <div class="title-child">
+            <img class="rem-icon" src="{% static 'icons/Delivery.png' %}">
+        </div>
+        <div class="title-text-child">
+            <span>Приход</span>
+        </div>
+    </div>
+</div>
+
+
+{% for index, row in remains_contlog.iterrows %}
+    <div class="remains-contlog-row">
+        <div class="first-row sticky-first-row">
+            {% for cel in row %}
+                {% if forloop.counter < 4 %}
+                    <div class="cel-{{ forloop.counter }}">
+                        {{ cel }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <div class="move-contlog orient-center-center"> <img class="rem-icon" src="{% static 'icons/Shipped.png' %}"> </div>
+        </div>
+
+        {% for cel in row %}
+            {% if forloop.counter >= 4 %}
+                {% if forloop.counter == 4 %}
+                    <div class="orient-start-center">
+                        Омск
+                    </div>
+                    <div class="cel-{{ forloop.counter }}">
+                        {{ cel }}
+                    </div>
+                {% elif forloop.counter == 8 %}
+                    <div class="orient-start-center">
+                        Новосибирск
+                    </div>
+                    <div class="cel-{{ forloop.counter }}">
+                        {{ cel }}
+                    </div>
+                {% elif forloop.counter == 12 %}
+                    <div class="orient-start-center">
+                        Новокузнецк
+                    </div>
+                    <div class="cel-{{ forloop.counter }}">
+                        {{ cel }}
+                    </div>
+                {% elif forloop.counter == 16 %}
+                    <div class="orient-start-center">
+                        Красноярск
+                    </div>
+                    <div class="cel-{{ forloop.counter }}">
+                        {{ cel }}
+                    </div>
+                {% elif forloop.counter == 20 %}
+                    <div class="orient-start-center">
+                        Абакан
+                    </div>
+                    <div class="cel-{{ forloop.counter }}">
+                        {{ cel }}
+                    </div>
+                {% else %}
+                    <div class="cel-{{ forloop.counter }}">
+                        {{ cel }}
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endfor %}
+
+
+<!-- Modal -->
+<div class="modal fade" id="skuMoveModal" tabindex="-1" aria-labelledby="skuMoveModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg modal-fullscreen-md-down">
+    <div class="modal-content">
+
+    </div>
+  </div>
+</div>
+
+<script>
+    $(function (){
+        $("#search").focus();
+
+        $("#search").keyup(function(){
+            _this = this;
+            $.each($("div.remains-contlog-row"), function() {
+                if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1) {
+                    $(this).hide();
+                    } else {
+                    $(this).show();
+                    }
+            });
+        });
+
+        $('#cancel').on('click', function(){
+            $("#search").val('');
+            $.each($("div.remains-contlog-row"), function() {
+                    $(this).show();
+            });
+        });
+    })
+</script>
+
+<script src="{% static 'skuMove.js' %}"></script>

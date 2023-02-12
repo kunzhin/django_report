@@ -1,0 +1,48 @@
+.errorlist{
+    color: red;
+}
+
+body{
+    background-color: #f5f5f5;
+    font-size: 9pt;
+}
+
+nav{
+    font-size: 12pt;
+}
+
+.nav_sidebar{
+    font-size: 12pt;
+}
+
+.td_in_time {
+    background-color: #90EE90 !important;
+}
+
+.td_not_in_time {
+    background-color: #FFA07A !important;
+}
+
+.overlay {
+    overflow: auto;
+    z-index: 500;
+    background: rgba(0,0,0,.5);
+}
+
+.overlay, .popupOverlay {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    left: 0;
+}
+
+.rotWrap {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    margin-left: -100px;
+    margin-top: -25px;
+    width: 5em;
+    height: 5em;
+}

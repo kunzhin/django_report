@@ -1,0 +1,50 @@
+{% extends 'retail_census/index.html' %}
+
+{% load static %}
+
+{% block content %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            {% if outlet_item.deliveryContract == True %}
+                <li class="list-group-item"><b>Договор поставки:</b> Есть <img src="{% static 'ico/ok_32.png' %}" alt="">
+                <input type="button" class='btn btn-secondary btn-sm m-1'
+                                                onclick="history.back();" value="Назад"/>
+                </li>
+            {% else %}
+                <li class="list-group-item"><b>Договор поставки:</b> Нет <img src="{% static 'ico/cancel_32.png' %}">
+                <input type="button" class='btn btn-secondary btn-sm m-1'
+                                                onclick="history.back();" value="Назад"/>
+                </li>
+                <li class="list-group-item"><b>Статус:</b> {{ outlet_item.statusWorkedOut}}</li>
+            {% endif %}
+        </div>
+
+        <div class="card-body">
+            <img src="{{ outlet_item.photo.url }}" alt='{{ outlet_item.name_tt }}'
+                class="img-fluid img-thumbnail mx-auto d-block"
+                style="img-fluidmax-width: 100%; height: auto;">
+            <br>
+            <ul class="list-group list-group-flush" style="background-color: #d3d3d3">
+                <li class="list-group-item"><b>ESR:</b> {{ outlet_item.esr }}</li>
+                <li class="list-group-item"><b>Юр.лицо:</b> {{ outlet_item.corporateBodyName }}</li>
+                <li class="list-group-item"><b>ИНН:</b> {{ outlet_item.taxIdentificationNumber }}</li>
+                <li class="list-group-item"><b>Кол-во ТТ:</b> {{ outlet_item.count_tt }}</li>
+                <li class="list-group-item"><b>Контактное лицо:</b> {{ outlet_item.contactName }}</li>
+                <li class="list-group-item"><b>Номер телефона:</b> {{ outlet_item.phoneNumber }}</li>
+                <li class="list-group-item"><b>Дата переговоров:</b> {{ outlet_item.dateConversation }}</li>
+                <li class="list-group-item"><b>Наименование ТТ:</b> {{ outlet_item.name_tt}}</li>
+                <li class="list-group-item"><b>Адрес:</b> {{ outlet_item.city }}, {{ outlet_item.street }}, {{ outlet_item.houseNumber }}</li>
+                <li class="list-group-item"><b>Канал ТТ:</b> {{ outlet_item.channel_tt}}</li>
+                <li class="list-group-item"><b>Ассортимент Нестле:</b> {{ outlet_item.presenceNestle.all|join:", "}}</li>
+                <li class="list-group-item"><b>Конкуренты:</b> {{ outlet_item.competitors.all|join:", "}}</li>
+                <li class="list-group-item"><b>Комментарий:</b> {{ outlet_item.comment|safe|linebreaksbr}}</li>
+            </ul>
+        </div>
+
+        <div class="card-footer text-muted">
+            <b>Дата создания:</b> {{outlet_item.created_at|date:'d-m-Y'}}
+        </div>
+    </div>
+
+{% endblock content %}

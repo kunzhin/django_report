@@ -1,0 +1,29 @@
+{% load static %}
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'bootstrap\css\bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css\style.css' %}" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/static/favicon.png" />
+    <script src="{% static 'js\jquery-3.6.0.min.js' %}"></script>
+    <title>{% block title %} Ифнормационный портал Нестле {% endblock title %}</title>
+  </head>
+  <body>
+
+    <div class="container">
+        <div class="row justify-content-center text-center h-100" style="margin-top: 20%;">
+            <div class="col-4">
+                {% block main %}{% endblock main %}
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="{% static 'bootstrap\js\bootstrap.min.js' %}"></script>
+
+  </body>
+</html>

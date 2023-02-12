@@ -1,0 +1,44 @@
+{% block filter %}
+<div class="container">
+  <div class="row mb-3 align-items-center">
+    <div class="col-sm text-center mb-3 align-items-center">
+        <div class="input-group">
+
+          <span class="input-group-text btn-success">Период:</span>
+          <input type="date" class="form-control form-control-sm btn-outline-success" aria-label="Начальная дата" id="start_date">
+          <input type="date" class="form-control form-control-sm btn-outline-success" aria-label="Конечная дата" id="end_date">
+
+        </div>
+    </div>
+  {% comment %}
+    <div class="col-sm text-center mb-3 align-items-center">
+            {% for item in tier %}
+            <div class="form-check form-check-inline">
+            <input class="form-check-input bg-secondary" type="checkbox" value="{{ item.tier }}" id="{{ item.tier }}" checked>
+            <label class="form-check-label" for="{{ item.tier }}">{{ item.tier }}</label>
+            </div>
+            {% endfor %}
+    </div>
+    {% endcomment %}
+    <div class="col-sm text-center mb-3 align-items-center">
+        <div class="progress">
+            <span class="input-group-text">Time:</span>
+            <div class="progress-bar bg-success" role="progressbar" style="width: {{ time }}%;" aria-valuenow="{{ time }}" aria-valuemin="0" aria-valuemax="100">
+                {{ time }}%</div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    $(function (){
+        let today = new Date()
+        let firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+        let lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+
+        $('#start_date').val(get_date(firstDay))
+        $('#end_date').val(get_date(lastDay))
+    })
+</script>
+
+{% endblock filter %}
